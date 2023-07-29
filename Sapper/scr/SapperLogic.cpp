@@ -15,10 +15,10 @@ SapperLogic::~SapperLogic()
 
 char SapperLogic::GetCellState(int x, int y)
 {
-	if (field->GetShowState(x, y) != OPEN) // Скрывает не открытые ячейки
+	if (field->GetShowState(x, y) != OPEN) // Hides unopened cells
 		return SYMBOL_NOT_OPEN;
 
-	if (field->GetMineState(x, y) != MINE) // Показывает открытые ячейки 
+	if (field->GetMineState(x, y) != MINE) // Shows open cells
 		return SYMBOL_ZERO + field->GetNearbyMinesCount(x, y);
 	
 	return SYMBOL_MINE;
@@ -38,9 +38,9 @@ int SapperLogic::GetNearbyMines(int x, int y)
 			if (x == i && y == j)
 				continue;
 
-			if (_x >= field->GetHeight() || _x < 0) //Фильтр от ложных записей
+			if (_x >= field->GetHeight() || _x < 0) //Filter against false entries
 				continue;
-			if (_y >= field->GetWidth() || _y < 0) //Фильтр от ложных записей
+			if (_y >= field->GetWidth() || _y < 0) //Filter against false entries
 				continue;
 
 			if (field->GetMineState(_x, _y) == MINE)
@@ -79,7 +79,7 @@ void SapperLogic::SetRandomMine(int ingore_x, int ingore_y)
 		{
 			for (int j = -1; j <= 1; j++)
 			{
-				if (x == (ingore_x + i) && y == (ingore_y + j)) // Защита первого клика от мин
+				if (x == (ingore_x + i) && y == (ingore_y + j)) // First click protection against mines
 					skip = SKIP;
 			}
 		}
@@ -87,7 +87,7 @@ void SapperLogic::SetRandomMine(int ingore_x, int ingore_y)
 		if (field->GetMineState(x, y) == MINE)
 			skip = SKIP;
 
-		if (skip != SKIP) // Ставит мину на пустую ячейку
+		if (skip != SKIP) // Places a mine on an empty cell
 			field->SetMineState(x, y, MINE);
 	}
 }
@@ -97,10 +97,10 @@ void SapperLogic::OnChosenCell(int x, int y)
 	if (fistClick)
 		OnFirstClick(x, y);
 
-	if (field->GetMineState(x, y) == MINE) // БАБАХ!!!
+	if (field->GetMineState(x, y) == MINE) // BOOM!!!
 		gameOver = END_OF_GAME;
 
-	for (int i = -1; i <= 1; i++) // надо потом в отдельную функцию запилить
+	for (int i = -1; i <= 1; i++) // then you need to write it into a separate function
 	{
 		for (int j = -1; j <= 1; j++)
 		{

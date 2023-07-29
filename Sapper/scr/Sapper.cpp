@@ -10,7 +10,7 @@ int main()
 {
 	SapperLogic sapper(HEIGHT, WIDTH, 150);
 
-	while (!sapper.GetGameState()) // Отрисовка игры
+	while (!sapper.GetGameState()) // Game rendering
 	{
 		for (int i = 0; i < HEIGHT; i++)
 		{
@@ -33,7 +33,7 @@ int main()
 		sapper.OnChosenCell(x, y);
 	}
 
-	for (int i = 0; i < HEIGHT; i++) // Показывет поле после конца игры
+	for (int i = 0; i < HEIGHT; i++) // Shows the field after the end of the game
 	{
 		for (int j = 0; j < WIDTH; j++)
 		{
