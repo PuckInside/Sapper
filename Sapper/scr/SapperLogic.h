@@ -39,7 +39,7 @@ public:
 
 private:
 	void OnFirstClick(int x, int y);
-	void SetRandomMine(int ignore_x, int ignore_y);
+	void SpawnRandomMine(int ignore_x, int ignore_y);
 
 	int GetNearbyMines(int x, int y);
 };

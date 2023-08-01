@@ -53,7 +53,7 @@ int SapperLogic::GetNearbyMines(int x, int y)
 
 void SapperLogic::OnFirstClick(int x, int y)
 {
-	SetRandomMine(x, y);
+	SpawnRandomMine(x, y);
 	fistClick = false;
 
 	for (int i = 0; i < field->GetHeight(); i++)
@@ -67,11 +67,11 @@ void SapperLogic::OnFirstClick(int x, int y)
 	}
 }
 
-void SapperLogic::SetRandomMine(int ingore_x, int ingore_y)
+void SapperLogic::SpawnRandomMine(int ignore_x, int ignore_y)
 {
 	while (field->GetMineCount() <= mineCount)
 	{
-		bool skip = false;
+		bool isSkip = false;
 		int x = rand() % field->GetHeight();
 		int y = rand() % field->GetWidth();
 
@@ -79,15 +79,15 @@ void SapperLogic::SetRandomMine(int ingore_x, int ingore_y)
 		{
 			for (int j = -1; j <= 1; j++)
 			{
-				if (x == (ingore_x + i) && y == (ingore_y + j)) // First click protection against mines
-					skip = SKIP;
+				if (x == (ignore_x + i) && y == (ignore_y + j)) // First click protection against mines
+					isSkip = SKIP;
 			}
 		}
 
 		if (field->GetMineState(x, y) == MINE)
-			skip = SKIP;
+			isSkip = SKIP;
 
-		if (skip != SKIP) // Places a mine on an empty cell
+		if (isSkip != SKIP) // Places a mine on an empty cell
 			field->SetMineState(x, y, MINE);
 	}
 }
