@@ -13,17 +13,6 @@ SapperLogic::~SapperLogic()
 	delete field;
 }
 
-char SapperLogic::GetCellState(int x, int y)
-{
-	if (field->GetShowState(x, y) != OPEN) // Hides unopened cells
-		return SYMBOL_NOT_OPEN;
-
-	if (field->GetMineState(x, y) != MINE) // Shows open cells
-		return SYMBOL_ZERO + field->GetNearbyMinesCount(x, y);
-	
-	return SYMBOL_MINE;
-}
-
 int SapperLogic::GetNearbyMines(int x, int y)
 {
 	int nearby_mines = 0;

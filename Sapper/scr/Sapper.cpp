@@ -6,24 +6,35 @@
 #define HEIGHT 12 * 2
 #define WIDTH 12 * 3
 
+void FrameRendering(Field* field, bool isGameOver)
+{
+	if (isGameOver)
+	{
+		std::cout << std::endl;
+		setlocale(LC_ALL, "rus");
+		std::cout << "Конец игры!" << std::endl;
+	}
+
+	for (int i = 0; i < field->GetHeight(); i++)
+	{
+		for (int j = 0; j < field->GetWidth(); j++)
+		{
+			char cell_state = field->GetCellState(i, j);
+
+			std::cout << cell_state << " ";
+		}
+
+		std::cout << std::endl;
+	}
+}
+
 int main()
 {
 	SapperLogic sapper(HEIGHT, WIDTH, 150);
+	FrameRendering(sapper.GetField(), sapper.GetGameState());
 
 	while (!sapper.GetGameState()) // Game rendering
 	{
-		for (int i = 0; i < HEIGHT; i++)
-		{
-			for (int j = 0; j < WIDTH; j++)
-			{
-				char cell_state = sapper.GetCellState(i, j);
-
-				std::cout << cell_state << " ";
-			}
-
-			std::cout << std::endl;
-		}
-
 		int x = 0;
 		int y = 0;
 
@@ -31,21 +42,6 @@ int main()
 		std::cin >> y;
 
 		sapper.OnChosenCell(x, y);
+		FrameRendering(sapper.GetField(), sapper.GetGameState());
 	}
-
-	for (int i = 0; i < HEIGHT; i++) // Shows the field after the end of the game
-	{
-		for (int j = 0; j < WIDTH; j++)
-		{
-			char cell_state = sapper.GetCellState(i, j);
-
-			std::cout << cell_state << " ";
-		}
-
-		std::cout << std::endl;
-	}
-	std::cout << std::endl;
-
-	setlocale(LC_ALL, "rus");
-	std::cout << "Конец игры!" << std::endl;
 }

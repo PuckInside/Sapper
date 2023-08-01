@@ -1,5 +1,12 @@
 #pragma once
 
+#define OPEN true
+#define MINE true
+
+#define SYMBOL_NOT_OPEN 35
+#define SYMBOL_MINE 64
+#define SYMBOL_ZERO 48
+
 struct Cell
 {
 	bool isMine = false;
@@ -26,6 +33,7 @@ public:
 	int GetNearbyMinesCount(int x, int y);
 	bool GetMineState(int x, int y);
 	bool GetShowState(int x, int y);
+	char GetCellState(int x, int y);
 
 	void SetMineState(int x, int y, bool state);
 	void SetShowState(int x, int y, bool state);

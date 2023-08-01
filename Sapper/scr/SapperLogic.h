@@ -30,11 +30,12 @@ public:
 	SapperLogic(int height, int width, int mine_count);
 	~SapperLogic();
 
-	bool GetGameState() const { return gameOver; }
-	int GetMineCount() const { return mineCount; }
-	int GetMarkCount() const { return mineCount - markCount; }
+	inline bool GetGameState() const { return gameOver; }
+	inline int GetMineCount() const { return mineCount; }
+	inline int GetMarkCount() const { return mineCount - markCount; }
 
-	char GetCellState(int x, int y);
+	inline Field* GetField() { return field; }
+
 	void OnChosenCell(int x, int y);
 
 private:

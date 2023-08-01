@@ -46,6 +46,17 @@ bool Field::GetShowState(int x, int y)
 	return state;
 }
 
+char Field::GetCellState(int x, int y)
+{
+	if (GetShowState(x, y) != OPEN) // Hides unopened cells
+		return SYMBOL_NOT_OPEN;
+
+	if (GetMineState(x, y) != MINE) // Shows open cells
+		return SYMBOL_ZERO + GetNearbyMinesCount(x, y);
+
+	return SYMBOL_MINE;
+}
+
 void Field::SetMineState(int x, int y, bool state)
 {
 	x = CheckX(x);
