@@ -8,13 +8,6 @@
 
 void FrameRendering(Field* field, bool isGameOver)
 {
-	if (isGameOver)
-	{
-		std::cout << std::endl;
-		setlocale(LC_ALL, "rus");
-		std::cout << "Конец игры!" << std::endl;
-	}
-
 	for (int i = 0; i < field->GetHeight(); i++)
 	{
 		for (int j = 0; j < field->GetWidth(); j++)
@@ -25,6 +18,13 @@ void FrameRendering(Field* field, bool isGameOver)
 		}
 
 		std::cout << std::endl;
+	}
+
+	if (isGameOver)
+	{
+		std::cout << std::endl;
+		setlocale(LC_ALL, "rus");
+		std::cout << "Конец игры!" << std::endl;
 	}
 }
 
