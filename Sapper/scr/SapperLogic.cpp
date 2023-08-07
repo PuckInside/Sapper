@@ -1,11 +1,13 @@
 #include "SapperLogic.h"
 
 SapperLogic::SapperLogic(int height, int width, int mine_count)
-	:mineCount(mine_count), markCount(0), correctMarkCount(0), 
-	fistClick(true), gameOver(false)
+	:correctMarkCount(0), fistClick(true), gameOver(false)
 {
 	field = new Field(height, width);
 	srand(time(NULL));
+
+	SetMineCount(mine_count, height, width);
+	SetMarkCount(markCount);
 }
 
 SapperLogic::~SapperLogic()
@@ -38,6 +40,21 @@ int SapperLogic::GetNearbyMines(int x, int y)
 	}
 
 	return nearby_mines;
+}
+
+void SapperLogic::SetMineCount(int mine_count, int height, int width)
+{
+	int allowableMineCount = (height * width) / DENSITY; 
+
+	if (mine_count > allowableMineCount)
+		mineCount = allowableMineCount;
+	else
+		mineCount = mine_count;
+}
+
+void SapperLogic::SetMarkCount(int count)
+{
+	markCount = count;
 }
 
 void SapperLogic::OnFirstClick(int x, int y)

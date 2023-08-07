@@ -3,8 +3,8 @@
 #include "Field.h"
 #include "SapperLogic.h"
 
-#define HEIGHT 12 * 2
-#define WIDTH 12 * 3
+#define HEIGHT 12
+#define WIDTH 12
 
 void FrameRendering(Field* field, bool isGameOver)
 {
@@ -30,7 +30,7 @@ void FrameRendering(Field* field, bool isGameOver)
 
 int main()
 {
-	SapperLogic sapper(HEIGHT, WIDTH, 150);
+	SapperLogic sapper(HEIGHT, WIDTH, 500);
 	FrameRendering(sapper.GetField(), sapper.GetGameState());
 
 	while (!sapper.GetGameState()) // Game rendering

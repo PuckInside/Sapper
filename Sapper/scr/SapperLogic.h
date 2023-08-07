@@ -10,9 +10,7 @@
 #define SKIP true
 #define END_OF_GAME true
 
-#define SYMBOL_NOT_OPEN 35
-#define SYMBOL_MINE 64
-#define SYMBOL_ZERO 48
+#define DENSITY 5
 
 class SapperLogic
 {
@@ -43,5 +41,8 @@ private:
 	void SpawnRandomMine(int ignore_x, int ignore_y);
 
 	int GetNearbyMines(int x, int y);
+
+	void SetMineCount(int mine_count, int height, int width);
+	void SetMarkCount(int count);
 };
 
