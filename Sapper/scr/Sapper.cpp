@@ -8,8 +8,31 @@
 
 void FrameRendering(Field* field, bool isGameOver)
 {
+	std::cout << "  ";
+	for (int i = 0; i < field->GetWidth(); i++)
+	{
+		char num;
+
+		if (i < 10)
+			num = 48 + i;
+		else
+			num = 65 + (i - 10);
+
+		std::cout << num << " ";
+	}
+	std::cout << std::endl;
+
 	for (int i = 0; i < field->GetHeight(); i++)
 	{
+		char num;
+
+		if (i < 10)
+			num = 48 + i;
+		else
+			num = 65 + (i - 10);
+
+		std::cout << num << " ";
+
 		for (int j = 0; j < field->GetWidth(); j++)
 		{
 			char cell_state = field->GetCellState(i, j);
