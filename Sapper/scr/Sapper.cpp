@@ -3,12 +3,50 @@
 #include "Field.h"
 #include "SapperLogic.h"
 
-#define HEIGHT 12
-#define WIDTH 12
+#define HEIGHT 8
+#define WIDTH 8
+
+bool InputHandler(SapperLogic& sapper)
+{
+	std::string input;
+	std::cin >> input;
+
+	if (input.size() != 3)
+	{
+		std::cout << "Ошибка ввода!" << std::endl;
+		return false;
+	}
+
+	if (input[0] != 'c')
+	{
+		std::cout << "Неправильная команда!" << std::endl;
+		return false;
+	}
+
+	if (input[1] <= 48 || input[1] >= 57)
+	{
+		std::cout << "Неравильные число строки!" << std::endl;
+		return false;
+	}
+
+	if (input[2] <= 48 || input[2] >= 57)
+	{
+		std::cout << "Неравильные число столбца!" << std::endl;
+		return false;
+	}
+
+	int x = input[1] - 49;
+	int y = input[2] - 49;
+
+	if (input[0] == 'c')
+		sapper.OnChosenCell(x, y);
+
+	return true;
+}
 
 void FrameRendering(Field* field, bool isGameOver)
 {
-	std::cout << "  ";
+	std::cout << "N ";
 	for (int i = 0; i < field->GetWidth(); i++)
 	{
 		char num;
@@ -18,7 +56,7 @@ void FrameRendering(Field* field, bool isGameOver)
 		else
 			num = 65 + (i - 10);
 
-		std::cout << num << " ";
+		std::cout << ++num << " ";
 	}
 	std::cout << std::endl;
 
@@ -31,7 +69,7 @@ void FrameRendering(Field* field, bool isGameOver)
 		else
 			num = 65 + (i - 10);
 
-		std::cout << num << " ";
+		std::cout << ++num << " ";
 
 		for (int j = 0; j < field->GetWidth(); j++)
 		{
@@ -46,7 +84,6 @@ void FrameRendering(Field* field, bool isGameOver)
 	if (isGameOver)
 	{
 		std::cout << std::endl;
-		setlocale(LC_ALL, "rus");
 		std::cout << "Конец игры!" << std::endl;
 	}
 }
@@ -58,13 +95,9 @@ int main()
 
 	while (!sapper.GetGameState()) // Game rendering
 	{
-		int x = 0;
-		int y = 0;
+		setlocale(LC_ALL, "rus");
 
-		std::cin >> x;
-		std::cin >> y;
-
-		sapper.OnChosenCell(x, y);
-		FrameRendering(sapper.GetField(), sapper.GetGameState());
+		if (InputHandler(sapper))
+			FrameRendering(sapper.GetField(), sapper.GetGameState());
 	}
 }

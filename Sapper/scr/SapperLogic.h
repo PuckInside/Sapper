@@ -21,8 +21,6 @@ private:
 	bool fistClick;
 
 	int mineCount;
-	int markCount;
-	int correctMarkCount;
 
 public:
 	SapperLogic(int height, int width, int mine_count);
@@ -30,7 +28,6 @@ public:
 
 	inline bool GetGameState() const { return gameOver; }
 	inline int GetMineCount() const { return mineCount; }
-	inline int GetMarkCount() const { return mineCount - markCount; }
 
 	inline Field* GetField() { return field; }
 

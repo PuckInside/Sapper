@@ -1,13 +1,12 @@
 #include "SapperLogic.h"
 
 SapperLogic::SapperLogic(int height, int width, int mine_count)
-	:correctMarkCount(0), fistClick(true), gameOver(false)
+	:fistClick(true), gameOver(false)
 {
 	field = new Field(height, width);
 	srand(time(NULL));
 
 	SetMineCount(mine_count, height, width);
-	SetMarkCount(markCount);
 }
 
 SapperLogic::~SapperLogic()
@@ -50,11 +49,6 @@ void SapperLogic::SetMineCount(int mine_count, int height, int width)
 		mineCount = allowableMineCount;
 	else
 		mineCount = mine_count;
-}
-
-void SapperLogic::SetMarkCount(int count)
-{
-	markCount = count;
 }
 
 void SapperLogic::OnFirstClick(int x, int y)
